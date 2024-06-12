@@ -1,12 +1,12 @@
-import { useState } from 'react'
-function App() {
-  const [count, setCount] = useState(0)
+import MostrarInformacion from './components/MostrarInformacion';
 
+function App() {
   return (
     <>
-    <h1 className='text-center'>Hola</h1>
+      <h1 className="text-center">Chat BCH</h1>
+      <MostrarInformacion />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
