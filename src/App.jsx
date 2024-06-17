@@ -1,12 +1,11 @@
-import { useState } from 'react'
-function App() {
-  const [count, setCount] = useState(0)
+import { useState } from 'react';
+import Chatbot from './components/Chatbot';
 
+function App() {
   return (
-    <>
-    <h1 className='text-center'>Hola</h1>
-    </>
-  )
+    <div className="app"><Chatbot />  </div>
+  );
 }
 
-export default App
+export default App;
+
