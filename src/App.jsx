@@ -1,12 +1,18 @@
-import MostrarInformacion from './components/MostrarInformacion';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
 import Chatbot from './components/Chatbot';
 
 function App() {
   return (
-    <div className="app"><Chatbot />  
-      <MostrarInformacion />
-    </div>
-  );
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
+        <Route path="/chatbot" element={<Chatbot/>}/>
+      </Routes>
+    </Router>
+  )
 }
 
-export default App;
+export default App
