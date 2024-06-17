@@ -9,7 +9,7 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        'logo': "url('./src/assets/Logo.png')",
+        'logo': "url('./src/assets/Logo1.jpg')",
       },
       colors: {
         'custom-dark': '#373739',

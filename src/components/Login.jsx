@@ -11,6 +11,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // logica
+    navigate('/chatbot')
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,6 +31,7 @@ const Login = () => {
           <div className="mb-4">
             <input
               type="text"
+              name='username'
               className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
               placeholder="Direccion de correo electronico"
               value={userData.username}
@@ -40,6 +42,7 @@ const Login = () => {
           <div className="mb-4">
             <input
               type="password"
+              name='password'
               className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
               placeholder="Contraseña"
               value={userData.password}
