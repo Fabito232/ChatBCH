@@ -16,8 +16,6 @@ function MostrarInformacion() {
         const { processedData, countryList } = procesarDatos(jsonData);
         setData(processedData);
         setCountries(countryList);
-        console.log('Datos procesados:', processedData);
-        console.log('Lista de países:', countryList);
       }
     };
 
@@ -35,7 +33,7 @@ function MostrarInformacion() {
     if (match) {
       const week = `semana ${match[1]}`;
       const country = match[2].trim();
-
+      
       if (data[week] && data[week][country]) {
         setAnswer(`En el año 2023 en la ${week}, murieron ${data[week][country]} personas en el país de ${country} por el Covid 19.`);
       } else {
