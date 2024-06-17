@@ -1,0 +1,144 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #020202;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 23vh;
+  
+}
+
+.chat-container {
+  width: 1000px; 
+  height: 650px; 
+  background-color: #020202;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  overflow: hidden; 
+  display: flex;
+  flex-direction: column;
+  position: relative; 
+  margin-top:500px;
+}
+
+.chat-header {
+  background-color: #9ae5f3;
+  color: #ffffff;
+  padding: 10px; 
+  font-size: 32px; 
+  text-align: center;
+  border-bottom: 3px solid #9ae5f3;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  z-index: 1; 
+}
+
+.chat-body {
+  flex: 1;
+  overflow-y: scroll ;
+  padding: 10px; 
+  background-color: #020202;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 10px;
+  position: relative; 
+  z-index: 0; 
+  
+}
+
+.message {
+  margin-bottom: 20px; 
+  padding: 15px 20px; 
+  border-radius: 20px; 
+  max-width: 80%; 
+  word-wrap: break-word;
+  position: relative;
+  font-size: 18px; 
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #373739;
+  color: #ffffff;
+}
+
+.bot {
+  align-self: flex-start;
+  background-color: #9ae5f3;
+  color: #19191a;
+}
+
+.message-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 10px; 
+  background-color: #020202;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+  
+}
+
+.message-input {
+  flex: 1;
+  padding: 15px; 
+  border: 2px solid #ccc; 
+  border-radius: 35px; 
+  font-size: 18px; 
+  outline: none;
+  margin-right: 10px; 
+}
+
+.send-button {
+  padding: 15px 30px; 
+  border: none;
+  border-radius: 35px; 
+  background-color: #60d4ea;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px; 
+  transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+  background-color: #9ae5f3;
+}
+
+
+
+.chat-container::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -20px;
+  right: -20px;
+  
+  background: linear-gradient(45deg, #00000040, #ffffff40);
+  pointer-events: none; 
+  z-index: -1; 
+  border-radius: 15px;
+}
+
+.chat-body::after {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: -40px;
+  right: -40px;
+  bottom: -40px;
+  background: radial-gradient(circle closest-side, transparent 0%, #00000030 100%);
+  pointer-events: none; 
+  z-index: -1; 
+  border-radius: 15px;
+  animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}

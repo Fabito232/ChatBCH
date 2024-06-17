@@ -1,11 +1,11 @@
 import MostrarInformacion from './components/MostrarInformacion';
+import Chatbot from './components/Chatbot';
 
 function App() {
   return (
-    <>
-      <h1 className="text-center">Chat BCH</h1>
+    <div className="app"><Chatbot />  
       <MostrarInformacion />
-    </>
+    </div>
   );
 }
 
