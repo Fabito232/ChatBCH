@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection, where, getDocs, query } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -12,7 +14,32 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-   //Logica
+    try {
+      // Verificar si ya existe un usuario con el mismo username
+      const usuariosRef = collection(db, 'usuarios');
+      const usuarioQuery = query(usuariosRef, where('username', '==', userData.username));
+      const querySnapshot = await getDocs(usuarioQuery);
+
+      if (!querySnapshot.empty) {
+        alert('Ya existe un usuario con ese nombre de usuario.');
+        return;
+      }
+
+      // Guardar usuario en Firestore
+      const newUser = {
+        userName: userData.username,
+        email: userData.email,
+        password: userData.password // Aquí se guarda la contraseña hasheada
+      };
+
+      const docRef = await addDoc(usuariosRef, newUser);
+
+      // Redirigir a la página deseada después del registro exitoso
+      navigate('/chatbot');
+    } catch (error) {
+      console.error('Error al procesar el registro: ', error);
+      alert('Hubo un error al procesar el registro. Por favor, inténtalo de nuevo.');
+    }
   };
 
   const handleChange = (e) => {
@@ -56,7 +83,7 @@ const Register = () => {
             <input
               type="password"
               name="password"
-               className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
               placeholder="Contraseña"
               value={userData.password}
               onChange={handleChange}
@@ -67,7 +94,7 @@ const Register = () => {
             <input
               type="password"
               name="confirmPassword"
-               className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
+              className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
               placeholder="Confirmar Contraseña"
               value={userData.confirmPassword}
               onChange={handleChange}
@@ -75,7 +102,7 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-          <button type="submit" className="w-full px-4 py-2 bg-custom-blue-light rounded-md text-white hover:bg- focus:outline-none focus:bg-blue-400">Registrarse</button>
+            <button type="submit" className="w-full px-4 py-2 bg-custom-blue-light rounded-md text-white hover:bg- focus:outline-none focus:bg-blue-400">Registrarse</button>
           </div>
           <div className="mt-6 text-center">
             <p className="text-white">¿Ya tienes una cuenta? <a href="/" className="text-custom-blue-light hover:underline">Inicia sesión</a></p>

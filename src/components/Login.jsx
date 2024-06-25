@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection, where, getDocs, query } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -10,8 +12,23 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // logica
-    navigate('/chatbot')
+    try {
+      // Consultar si existe algún usuario con el correo electrónico ingresado
+      const usersRef = collection(db, 'usuarios');
+      const q = query(usersRef, where('email', '==', userData.username));
+      const querySnapshot = await getDocs(q);
+
+      if (!querySnapshot.empty) {
+        // Si existe al menos un usuario con ese correo, avanzar
+        navigate('/chatbot');
+      } else {
+        // Si no existe un usuario con ese correo, mostrar un mensaje de error
+        alert('El correo electrónico ingresado no existe. Por favor, regístrate primero.');
+      }
+    } catch (error) {
+      console.error('Error al procesar el inicio de sesión:', error);
+      alert('Error al procesar el inicio de sesión. Por favor, intenta nuevamente más tarde.');
+    }
   };
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +47,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
-              type="text"
+              type="email"
               name='username'
               className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
               placeholder="Direccion de correo electronico"
