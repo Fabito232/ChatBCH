@@ -86,7 +86,23 @@
 }
 
 .send-button {
-  padding: 15px 30px; 
+  padding: 15px 25px; 
+  border: none;
+  border-radius: 35px; 
+  background-color: #60d4ea;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px; 
+  transition: background-color 0.3s ease;
+  margin-right: 5px;
+}
+
+.send-button:hover {
+  background-color: #9ae5f3;
+}
+
+.clear-button{
+  padding: 15px 25px; 
   border: none;
   border-radius: 35px; 
   background-color: #60d4ea;
@@ -96,7 +112,7 @@
   transition: background-color 0.3s ease;
 }
 
-.send-button:hover {
+.clear-button:hover {
   background-color: #9ae5f3;
 }
 
