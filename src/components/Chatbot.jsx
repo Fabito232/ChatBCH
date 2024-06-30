@@ -142,7 +142,6 @@ const Chatbot = () => {
 
     if (match) {
       const anno = match[1].trim();
-      console.log('ano: ', anno)
       let totalMuertes = 0;
       for (const semana in data) {
         for (const pais in data[semana]) {
@@ -176,7 +175,6 @@ const Chatbot = () => {
       if (match[2]) {
         country.push(match[2].trim());
       }
-      console.log(country)
       const allCountryExist = country.every(pais => {
         for (const semana in data) {
           if (data[semana][pais]) {
@@ -402,8 +400,9 @@ const Chatbot = () => {
   const pregunta10 = (message) => {
     const regex = /cuál fue el país con más muertes en el (\d+)\?/i;
     const match = message.match(regex);
-    const anno = match[1];
-    if (match) {
+
+    if (match && match[1]) {
+      const anno = match[1];
       let totalMuertesPorPais = {};
 
       for (const semana in data) {
@@ -470,15 +469,46 @@ const Chatbot = () => {
         </div>
         <div className="message-input-container">
           <input
+            placeholder="Pregunta algo aquí...."
+            className="input"
+            name="text"
             type="text"
-            className="message-input"
-            placeholder="Escribe un mensaje..."
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
           />
-          <button className="send-button" onClick={handleMessageSubmit}>Enviar</button>
-          <button className="clear-button" onClick={handleClearChat}>Limpiar</button>
+          <button className="cssbuttons-io-button" onClick={handleMessageSubmit}>Enviar
+            <div className="icon">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <button className="cssbuttons-io-button-limpiar" onClick={handleClearChat}>Limpiar
+            <div className="icon">
+              <svg
+                height="24"
+                width="24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+          </button>
         </div>
       </div>
     </div>
@@ -487,7 +517,7 @@ const Chatbot = () => {
 
 export default Chatbot;
 
-// 1. ¿Cuántas personas murieron en la semana “m” en el país “X” por el COVID 19? = True
+// 1. ¿Cuántas personas murieron en la semana "X" en el país de "Y" por el COVID 19?
 // 2. ¿Cuántas personas murieron en total en todas las semanas del país “X”?
 // 3. ¿Cuántas personas murieron en total en el 2023?
 // 4. ¿Cuántas personas murieron en total en todas las semanas de los países
