@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addDoc, collection, where, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase/config';
-
+import './Register.css';
 const Register = () => {
   const [userData, setUserData] = useState({
     username: '',
@@ -102,10 +102,10 @@ const Register = () => {
             />
           </div>
           <div className="mb-4">
-            <button type="submit" className="w-full px-4 py-2 bg-custom-blue-light rounded-md text-white hover:bg- focus:outline-none focus:bg-blue-400">Registrarse</button>
+            <button type="submit" className="w-full px-4 py-2 bg-ff9376 rounded-md text-white hover:bg-f6d586 focus:outline-none focus:bg-e9ae8c">Registrarse</button>
           </div>
           <div className="mt-6 text-center">
-            <p className="text-white">¿Ya tienes una cuenta? <a href="/" className="text-custom-blue-light hover:underline">Inicia sesión</a></p>
+            <p className="text-white">¿Ya tienes una cuenta? <a href="/" className="text-ff9376 hover-underline">Inicia sesión</a></p>
           </div>
         </form>
       </div>
