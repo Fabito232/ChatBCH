@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addDoc, collection, where, getDocs, query } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import './Login.css';
 
 const Login = () => {
   const [userData, setUserData] = useState({
@@ -38,6 +39,8 @@ const Login = () => {
     });
   };
 
+
+
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-custom-blue-sky">
       <div className="relative z-10 bg-custom-dark bg-opacity-95 rounded-3xl p-8 shadow-lg w-auto md:w-96">
@@ -50,7 +53,7 @@ const Login = () => {
               type="email"
               name='username'
               className="w-full p-2 border border-gray-300 rounded bg-gray-50 text-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-300"
-              placeholder="Direccion de correo electronico"
+              placeholder="Dirección de correo electrónico"
               value={userData.username}
               onChange={handleChange}
               required
@@ -68,10 +71,10 @@ const Login = () => {
             />
           </div>
           <div className="mb-4">
-            <button type="submit" className="w-full px-4 py-2 bg-custom-blue-light rounded-md text-white hover:bg- focus:outline-none focus:bg-blue-400">Iniciar sesión</button>
+            <button type="submit" className="w-full px-4 py-2 bg-ff9376 rounded-md text-white hover:bg-f6d586 focus:bg-e9ae8c focus:outline-none">Iniciar sesión</button>
           </div>
           <div className="mt-6 text-center">
-            <p className="text-white">¿No tienes una cuenta? <a href="register" className="text-custom-blue-light hover:underline">Regístrate</a></p>
+            <p className="text-white">¿No tienes una cuenta? <a href="register" className="text-ff9376 hover-underline">Regístrate</a></p>
           </div>
         </form>
       </div>

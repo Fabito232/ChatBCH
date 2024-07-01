@@ -1,0 +1,30 @@
+.bg-custom-blue-sky {
+    background-color: #8daaa6; 
+  }
+  
+  
+  .bg-custom-dark {
+    background-color: #d5d7cc; 
+  }
+  
+  
+  .bg-ff9376 {
+    background-color: #ff9376; 
+  }
+  
+  .hover-bg-f6d586:hover {
+    background-color: #f6d586;
+  }
+  
+  .focus-bg-e9ae8c:focus {
+    background-color: #e9ae8c; 
+  }
+  
+  
+  .text-ff9376 {
+    color: #ff9376; 
+  }
+  
+  .hover-underline:hover {
+    text-decoration: underline; 
+  }
