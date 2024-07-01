@@ -79,6 +79,9 @@ const Chatbot = () => {
       handleMessageSubmit(e);
     }
   };
+  function primeraLetraAMayuscula(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   // 1. ¿Cuántas personas murieron en la semana “m” en el país de “X” por el COVID 19?
   const pregunta1 = (message) => {
@@ -86,8 +89,8 @@ const Chatbot = () => {
     const match = message.match(regex);
     if (match) {
       const week = `semana ${match[1]}`;
-      const country = match[2].trim();
-
+      const country = primeraLetraAMayuscula(match[2].trim());
+      console.log(country)
       let botResponseText;
       if (data[week] && data[week][country]) {
         botResponseText = `En el año 2023 en la ${week}, murieron ${data[week][country]} personas en el país de ${country} por el Covid 19.`;
@@ -110,7 +113,7 @@ const Chatbot = () => {
     const match = message.match(regex);
 
     if (match) {
-      const country = match[1].trim();
+      const country = primeraLetraAMayuscula(match[1].trim());
       let totalMuertes = 0;
 
       for (const semana in data) {
@@ -171,9 +174,9 @@ const Chatbot = () => {
     const match = message.match(regex);
 
     if (match) {
-      const country = match[1].split(',').map(pais => pais.trim());
+      const country = match[1].split(',').map(pais => primeraLetraAMayuscula(pais.trim()));
       if (match[2]) {
-        country.push(match[2].trim());
+        country.push(primeraLetraAMayuscula(match[2].trim()));
       }
       const allCountryExist = country.every(pais => {
         for (const semana in data) {
@@ -222,7 +225,7 @@ const Chatbot = () => {
     const match = message.match(regex);
 
     if (match) {
-      const pais = match[1].trim();
+      const pais = primeraLetraAMayuscula(match[1].trim());
       let maxMuertes = 0;
       let semanaMax = '';
 
@@ -329,7 +332,7 @@ const Chatbot = () => {
     const match = message.match(regex);
 
     if (match) {
-      const pais = match[1].trim();
+      const pais = primeraLetraAMayuscula(match[1].trim());
       const semanaInicial = parseInt(match[2]);
       const semanaFinal = parseInt(match[3]);
 
@@ -361,46 +364,46 @@ const Chatbot = () => {
   };
 
   // 9. ¿Cuál fue la semana en la que menos personas murieron en el país “X”?
-  const pregunta9 = (message) => {
-    const regex = /cuál fue la semana en la que menos personas murieron en el país ([\w\s]+)/i;
-    const match = message.match(regex);
-    console.log(match, message)
+const pregunta9 = (message) => {
+  const regex = /cuál fue la semana en la que menos personas murieron en el país ([\w\s]+)/i;
+  const match = message.match(regex);
+  console.log(match, message)
 
-    if (match) {
-      const pais = primeraLetraAMayuscula(match[1].trim());
-      let minMuertes = 0;
-      let semanaMinMuertes = null;
-      console.log(data)
-      for (const semana in data) {
-        if(semana === "semana 1" && data[semana][pais] > 0){
-          minMuertes = data[semana][pais];
-          semanaMinMuertes = semana;
-        }else if (data[semana][pais] !== undefined && data[semana][pais] < minMuertes) {
-          console.log(data[semana][pais])
-          minMuertes = data[semana][pais];
-          semanaMinMuertes = semana;
-          console.log(semanaMinMuertes)
-        }
+  if (match) {
+    const pais = primeraLetraAMayuscula(match[1].trim());
+    let minMuertes = 0;
+    let semanaMinMuertes = null;
+    console.log(data)
+    for (const semana in data) {
+      if(semana === "semana 1" && data[semana][pais] > 0){
+        minMuertes = data[semana][pais];
+        semanaMinMuertes = semana;
+      }else if (data[semana][pais] !== undefined && data[semana][pais] < minMuertes) {
+        console.log(data[semana][pais])
+        minMuertes = data[semana][pais];
+        semanaMinMuertes = semana;
+        console.log(semanaMinMuertes)
       }
-      let botResponseText;
-      if (semanaMinMuertes !== null) {
-        botResponseText = `La semana en la que menos personas murieron en ${pais} fue la ${semanaMinMuertes} con ${minMuertes} muertes.`;
-      } else {
-        botResponseText = `No se encontraron datos para el país especificado: ${pais}.`;
-      }
-
-      setTimeout(() => {
-        const botResponse = { id: messages.length + 2, text: botResponseText, sender: 'bot' };
-        setMessages(prevMessages => [...prevMessages, botResponse]);
-      }, 2000);
-
-      return true;
-    } else {
-      return false;
     }
-  };
+    let botResponseText;
+    if (semanaMinMuertes !== null) {
+      botResponseText = `La semana en la que menos personas murieron en ${pais} fue la ${semanaMinMuertes} con ${minMuertes} muertes.`;
+    } else {
+      botResponseText = `No se encontraron datos para el país especificado: ${pais}.`;
+    }
 
-  //10. ¿Cuál fue el país con más muertes por el COVID 19 en el 2023?
+    setTimeout(() => {
+      const botResponse = { id: messages.length + 2, text: botResponseText, sender: 'bot' };
+      setMessages(prevMessages => [...prevMessages, botResponse]);
+    }, 2000);
+
+    return true;
+  } else {
+    return false;
+  }
+};
+
+  //10. ¿Cuál fue el país con más muertes en el 2023?
   const pregunta10 = (message) => {
     const regex = /cuál fue el país con más muertes por el COVID 19 en el (\d+)\?/i;
     const match = message.match(regex);
